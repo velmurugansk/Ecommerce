@@ -1,29 +1,46 @@
 import { Link } from "react-router-dom"
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
+import { useState } from "react";
 
 const Register = () => {
+
+  const [registerdata, setRegisterdata] = useState({
+    name : '',
+    email:'',
+    password:''
+  });
+
+  const updateChanges = (e) => {
+    setRegisterdata({...registerdata, [e.target.name] : e.target.value})
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(registerdata)
+  }
+
   return (
     <div className="flex min-h-screen justify-center items-center bg-[#c5c1e7]">
       <div className="w-[350px] text-white bg-[#6f68d1]  rounded-md">
         <div className="p-4">
           <h2 className="text-xl mb-3 text-center font-bold">Welcome to Ecommerce</h2>
           <p className="text-sm mb-3 font-medium">Please register your account</p>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col w-full gap-1 mb-3">
               <label htmlFor="name">Name</label>
               <input type="text" className="w-full px-2 py-1 outline-none rounded-md bg-transparent border
-              border-slate-400"  placeholder="Name" name="name" id="name" required />
+              border-slate-400"  placeholder="Name" name="name" id="name" value={registerdata.name} onChange={updateChanges} required />
             </div>
             <div className="flex flex-col w-full gap-1 mb-3">
               <label htmlFor="email">Email</label>
-              <input type="text" className="w-full px-2 py-1 outline-none rounded-md bg-transparent border
-              border-slate-400"  placeholder="Email" name="email" id="email" required />
+              <input type="email" className="w-full px-2 py-1 outline-none rounded-md bg-transparent border
+              border-slate-400"  placeholder="Email" name="email" id="email" value={registerdata.email} onChange={updateChanges} required />
             </div>
             <div className="flex flex-col w-full gap-1 mb-3">
               <label htmlFor="password">Password</label>
               <input type="password" className="w-full px-2 py-1 outline-none rounded-md bg-transparent border
-              border-slate-400"  placeholder="Password" name="password" id="password" required />
+              border-slate-400"  placeholder="Password" name="password" id="password" value={registerdata.password} onChange={updateChanges} required />
             </div>
 
             <div className="flex items-center w-full gap-3 mb-3">

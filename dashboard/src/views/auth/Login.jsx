@@ -1,23 +1,39 @@
 import { Link } from "react-router-dom"
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
+import { useState } from "react";
 
 const Login = () => {
+
+  const [userData, setUserdata] = useState({
+    email : '',
+    password: ''
+  })
+
+  const updateValues = (e) => {
+    setUserdata({...userData, [e.target.name]:e.target.value});
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(userData)
+  }
+
   return (
     <div className="flex min-h-screen justify-center items-center bg-[#c5c1e7]">
       <div className="w-[350px] text-white bg-[#6f68d1]  rounded-md">
         <div className="p-4">
         <h2 className="text-xl mb-3 text-center font-bold">Welcome to Ecommerce</h2>
-          <form>            
+          <form onSubmit={handleSubmit}>            
             <div className="flex flex-col w-full gap-1 mb-3">
               <label htmlFor="email">Email</label>
-              <input type="text" className="w-full px-2 py-1 outline-none rounded-md bg-transparent border
-              border-slate-400"  placeholder="Email" name="email" id="email" required />
+              <input type="email" className="w-full px-2 py-1 outline-none rounded-md bg-transparent border
+              border-slate-400"  placeholder="Email" name="email" id="email" onChange={updateValues} value={userData.email} required />
             </div>
             <div className="flex flex-col w-full gap-1 mb-3">
               <label htmlFor="password">Password</label>
               <input type="password" className="w-full px-2 py-1 outline-none rounded-md bg-transparent border
-              border-slate-400"  placeholder="Password" name="password" id="password" required />
+              border-slate-400"  placeholder="Password" name="password" id="password" onChange={updateValues} value={userData.password} required />
             </div>
 
             <button className="w-full bg-slate-800 hover:shadow-blue-300 hover:shadow-lg text-white
