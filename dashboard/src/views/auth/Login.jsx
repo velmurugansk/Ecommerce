@@ -2,8 +2,12 @@ import { Link } from "react-router-dom"
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { adminlogin } from "../../store/Reducers/authReducers";
 
 const Login = () => {
+
+  const dispatch = useDispatch()
 
   const [userData, setUserdata] = useState({
     email : '',
@@ -16,7 +20,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userData)
+    dispatch(adminlogin(userData))
   }
 
   return (
