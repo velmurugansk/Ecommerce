@@ -3,7 +3,6 @@ import { FaGoogle } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { adminlogin } from "../../store/Reducers/authReducers";
 
 const Login = () => {
 
@@ -19,8 +18,7 @@ const Login = () => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(adminlogin(userData))
+    e.preventDefault();    
   }
 
   return (
