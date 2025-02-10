@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../api/api";
 // import axios from "axios";
-export const adminlogin = createAsyncThunk('auth/adminlogin', async(info) => {
+export const adminlogin = createAsyncThunk('auth/adminlogin', async(info, {rejectWithValue, fulfillWithValue}) => {
     try{
-        const data = await api.post('/adminlogin', info, {
-        withCredentials:true});
-        console.log(data)
+        const data = await api.post('/adminlogin', info, {withCredentials:true});    
+        return fulfillWithValue(data);
     } catch(error) {
-        console.log(error.response.data)
+        // console.log(error.response)        
+        return rejectWithValue(error.response.data);
     }
 })
 
@@ -20,11 +20,26 @@ export const authReducers = createSlice({
         userInfo : ''
     },
     reducers : {
-
+        messageClear: (state) => {
+            state.errorMessage='';
+            // state.sucessMessage = '';
+        }
     },
-    extraReducers: () => {
-
+    extraReducers: (builder) => {
+        builder
+        .addCase(adminlogin.pending, (state) => {
+            state.loader = true;
+        })
+        .addCase(adminlogin.rejected, (state,  {payload} ) => {                                    
+            state.loader = false;
+            state.errorMessage = payload.error;
+        })
+        .addCase(adminlogin.fulfilled, (state,  {payload} ) => {                                    
+            state.loader = false;
+            state.sucessMessage = payload.data.message;
+        })
     }
 })
 
+export const {messageClear} = authReducers.actions
 export default authReducers.reducer
