@@ -1,8 +1,7 @@
-const adminModels = require('../models/adminModels');
-const {responseReturn} = require('../utiles/response');
+const { responseReturn } = require('../utiles/response');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+const adminModels = require('../models/adminModels');
 
 const createToken = async (data) => {
     const token = await jwt.sign(data, process.env.SECRET, {
@@ -38,4 +37,18 @@ const adminLogin = async(req,res) => {
     }
 }
 
-module.exports = {adminLogin}
+const getUser = async (req, res) => {
+    let {role, id} = req;
+    try{
+        if(role == 'admin') {
+            const user = await adminModels.findById(id);
+            responseReturn(res, 200, { status: true, data : user});
+        } else {
+            console.log('seller')
+        }
+    } catch(error) {
+        console.log(error.message)
+    }
+}
+
+module.exports = {adminLogin, getUser}

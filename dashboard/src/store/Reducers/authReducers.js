@@ -3,7 +3,8 @@ import api from "../../api/api";
 // import axios from "axios";
 export const adminlogin = createAsyncThunk('auth/adminlogin', async(info, {rejectWithValue, fulfillWithValue}) => {
     try{
-        const data = await api.post('/adminlogin', info, {withCredentials:true});    
+        const data = await api.post('/adminlogin', info, {withCredentials:true});          
+        localStorage.setItem('accessToken', data.data.token) 
         return fulfillWithValue(data);
     } catch(error) {
         // console.log(error.response)        
@@ -30,7 +31,8 @@ export const authReducers = createSlice({
         .addCase(adminlogin.pending, (state) => {
             state.loader = true;
         })
-        .addCase(adminlogin.rejected, (state,  {payload} ) => {                                    
+        .addCase(adminlogin.rejected, (state,  {payload} ) => {   
+            console.log(payload)                                 
             state.loader = false;
             state.errorMessage = payload.error;
         })
