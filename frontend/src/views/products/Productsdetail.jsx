@@ -75,7 +75,7 @@ const Productsdetail = () => {
   }, [])
 
   return (
-    <div className="px-4 pt-20 xl:px-24 xl:pt-20">
+    <div className="px-4 pt-20 xl:px-24 xl:pt-20 pb-3">
       {!isObjectEmpty(productData) ? <div className="grid grid-cols-12 gap-4">
         <div className="col-span-4"><img src={productData.thumbnail} /></div>
         <div className="col-span-6"><h2 className="text-2xl font-medium">{productData.title}</h2>
