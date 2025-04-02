@@ -45,20 +45,19 @@ const Header = () => {
   
   return (
     <div className="flex fixed bg-white px-6 py-2 z-10 items-center justify-between w-full shadow-lg">
-      <Link className='mr-2 ml-2 text-lg hover:text-[#578FCA]' to="/"><img src={logo} alt="logo" className='h-12 w-20' /></Link>      
-      <ul className='list-none'>
-        
-      </ul>
+      <Link className='mr-2 ml-2 text-lg hover:text-[#578FCA]' to="/"><img src={logo} alt="logo" className='h-12 w-20' /></Link>            
       <div className='flex items-center'>
         <div className="relative mr-2">
-          <IoCartOutline className='mr-2 text-2xl cursor-pointer' />
+          <Link to="/cart"><IoCartOutline className='mr-2 text-2xl cursor-pointer' /></Link>          
           {cartCount > 0 && isAuthenticated ?
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
               {cartCount}
             </span>
           : ''}
         </div>
-        {isAuthenticated ? <div className='group relative'><div className='flex items-center capitalize'><img src={user} className='h-10 w-10 mr-2 ml-2' alt="user image" />{userData && 'name' in userData ? userData.name : ''}</div><div className="absolute z-50 hidden pt-1 right-1 group-hover:flex">
+        {isAuthenticated ? <div className='group relative'><div className='flex items-center capitalize'>
+        <img src={user} className='h-10 w-10 mr-2 ml-2' alt="user image" />{userData && 'name' in userData ? userData.name : ''}</div>
+        <div className="absolute z-50 hidden pt-1 right-1 group-hover:flex">
         <div className="w-full rounded-md border border-gray-200 bg-white opacity-0 shadow-lg transition-opacity duration-300 p-2 group-hover:opacity-100 divide-y divide-gray-100">          
           <Link className='text-base hover:text-[#578FCA]' to="">Profile</Link><br />
           <Link className='text-base hover:text-[#578FCA]' to="">Orders</Link>                    
