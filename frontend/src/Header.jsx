@@ -1,6 +1,6 @@
 import logo from '../src/assets/logo.png'
 import { Link, useNavigate } from 'react-router-dom'
-import { IoCartOutline, IoLogOutOutline } from "react-icons/io5";
+import { IoCartOutline } from "react-icons/io5";
 import { useSelector, useDispatch } from 'react-redux';
 import user from "./assets/user.png";
 import { logout } from './reducers/userAuthenticate';

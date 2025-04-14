@@ -7,6 +7,7 @@ export const cartContext = createContext();
 export const CartProvider = ({ children }) => {
     const userid = useSelector((state) => state.cookieAuth.user);
     const [cartCount, setCartcount] = useState(0);
+    const [cartProducts, setCartproducts] = useState([]);
     let uid = userid && userid.id ? userid.id : '';
     const getCartdetails = async () => {
         if (uid) {
@@ -16,6 +17,7 @@ export const CartProvider = ({ children }) => {
                 let resultData = fetchCartdetails.data.data
                 let produtData = resultData.products && resultData.products.length > 0 ? resultData.products : [];
                 let count = produtData && produtData.length > 0 ? produtData.length : 0;
+                setCartproducts(produtData);
                 setCartcount(count);
             }
         } else {
@@ -23,7 +25,7 @@ export const CartProvider = ({ children }) => {
         }
     }
 
-    const value = { cartCount, getCartdetails };
+    const value = { cartCount, cartProducts, getCartdetails };
 
     return (
         <cartContext.Provider value={value}>
